@@ -54,7 +54,7 @@ func main() {
 				Name:   "secret",
 				Usage:  "Bitly API secret",
 				EnvVar: "BITLY_SECRET",
-			}
+			},
 			cli.BoolFlag{
 				Name:  "version",
 				Usage: "Show version info",
@@ -62,7 +62,7 @@ func main() {
 			cli.BoolFlag{
 				Name:  "revision",
 				Usage: "Show revision info",
-			},		
+			},
 		),
 		micro.Version(Version),
 		micro.RegisterTTL(time.Second*30),
