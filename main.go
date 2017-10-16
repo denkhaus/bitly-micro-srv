@@ -1,7 +1,9 @@
 package main
 
 import (
+	"fmt"
 	"log"
+	"os"
 	"time"
 
 	"github.com/denkhaus/bitly-api-go"
@@ -52,14 +54,32 @@ func main() {
 				Name:   "secret",
 				Usage:  "Bitly API secret",
 				EnvVar: "BITLY_SECRET",
-			}),
-
+			}
+			cli.BoolFlag{
+				Name:  "version",
+				Usage: "Show version info",
+			},
+			cli.BoolFlag{
+				Name:  "revision",
+				Usage: "Show revision info",
+			},		
+		),
+		micro.Version(Version),
 		micro.RegisterTTL(time.Second*30),
 		micro.RegisterInterval(time.Second*10),
 	)
 
 	service.Init(
 		micro.Action(func(c *cli.Context) {
+			if c.Bool("version") {
+				fmt.Printf("version: %s", Version)
+				os.Exit(0)
+			}
+			if c.Bool("revision") {
+				fmt.Printf("revision: %s", GitCommit)
+				os.Exit(0)
+			}
+
 			accessToken := c.String("accessToken")
 			if accessToken == "" {
 				log.Fatal(errors.New("bitly access token undefined"))

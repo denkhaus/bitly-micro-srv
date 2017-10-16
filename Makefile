@@ -1,6 +1,7 @@
 .PHONY: proto build
 
-IMAGE_NAME=denkhaus/bitly-micro-srv
+VERSION=0.0.13
+IMAGE_NAME=denkhaus/bitly-micro-srv:$(VERSION)
 
 all: deploy
 
@@ -14,10 +15,10 @@ deploy: push
 	rancher-compose -p services up -d --force-upgrade
 
 push: build
-	docker push $(IMAGE_NAME):latest
+	docker push $(IMAGE_NAME)
 
 build: proto commit
-	docker build  -t $(IMAGE_NAME)  .
+	docker build --build-arg VERSION=$(VERSION) --build-arg GIT_COMMIT=$(shell git rev-list -1 HEAD) -t $(IMAGE_NAME)  .
 
 commit:
 	git add -A && git commit -a -m "proceed"

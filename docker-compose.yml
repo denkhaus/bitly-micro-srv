@@ -1,7 +1,7 @@
 ################################################################################
 bitly:
   restart: always
-  image: ${IMAGE_NAME}:latest
+  image: ${IMAGE_NAME}
   environment:
     MICRO_REGISTRY: mdns
     MICRO_SERVER_NAME: denkhaus.micro.srv.bitly
