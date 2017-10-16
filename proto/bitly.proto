@@ -1,0 +1,15 @@
+syntax = "proto3";
+
+package denkhaus.micro.srv.bitly;
+
+service Bitly {
+	rpc Shorten(Request) returns (Response) {}
+}
+
+message Request {
+	string url = 1;
+}
+
+message Response {
+	string url = 1;
+}
