@@ -1,3 +1,5 @@
 Makefile
 docker-compose.yml
 rancher-compose.yml
+LICENSE
+README.md

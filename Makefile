@@ -10,8 +10,8 @@ proto:
 
 deploy: push
 	@IMAGE_NAME=$(IMAGE_NAME) \
-	@BITLY_ACCESS_TOKEN=$(BITLY_ACCESS_TOKEN) \
-	@BITLY_SECRET=$(BITLY_SECRET) \
+	BITLY_ACCESS_TOKEN=$(BITLY_ACCESS_TOKEN) \
+	BITLY_SECRET=$(BITLY_SECRET) \
 	@rancher-compose -p services up -d --force-upgrade
 
 push: build
