@@ -2,7 +2,6 @@
 
 IMAGE_NAME=denkhaus/bitly-micro-srv
 
-
 all: deploy
 
 proto:
@@ -12,7 +11,7 @@ deploy: push
 	@IMAGE_NAME=$(IMAGE_NAME) \
 	BITLY_ACCESS_TOKEN=$(BITLY_ACCESS_TOKEN) \
 	BITLY_SECRET=$(BITLY_SECRET) \
-	@rancher-compose -p services up -d --force-upgrade
+	rancher-compose -p services up -d --force-upgrade
 
 push: build
 	docker push $(IMAGE_NAME):latest
