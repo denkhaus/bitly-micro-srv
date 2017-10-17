@@ -3,6 +3,6 @@
 git add -A  
 test $(git status --porcelain 2>/dev/null | egrep "^(M| M)" | wc -l) == 0 || git commit -a -m "proceed" && \
 VERSION_OLD=$(git describe --abbrev=0 --tags) && \
-VERSION_NEW=$($VERSION_OLD | awk 'BEGIN { FS="." } { $3++; if ($3 > 99) { $3=0; $2++; if ($2 > 99) { $2=0; $1++ } } } { printf "%d.%d.%d", $1, $2, $3 }') && \
+VERSION_NEW=$(echo $VERSION_OLD | awk 'BEGIN { FS="." } { $3++; if ($3 > 99) { $3=0; $2++; if ($2 > 99) { $2=0; $1++ } } } { printf "%d.%d.%d", $1, $2, $3 }') && \
 git tag $VERSION_NEW 
 # git push origin master
