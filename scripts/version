@@ -6,6 +6,6 @@ VERSION_NEW=$(echo $VERSION_CUR | awk 'BEGIN { FS="." } { $3++; if ($3 > 99) { $
 echo "new version is $VERSION_NEW" 
 
 git add -A  
-test $(git status --porcelain 2>/dev/null | egrep "^(M| M)" | wc -l) == 0 || git commit -a -m $VERSION_NEW && \
+test $(git status --porcelain 2>/dev/null | egrep "^(M| M)" | wc -l) == '0' || git commit -a -m $VERSION_NEW && \
 git tag $VERSION_NEW && git push origin master
  
