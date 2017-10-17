@@ -92,7 +92,6 @@ func main() {
 		}),
 	)
 
-	// Run server
 	if err := service.Run(); err != nil {
 		log.Fatal(err)
 	}
