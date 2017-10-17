@@ -22,7 +22,8 @@ build: proto commit
 
 commit:
 	git add -A  
-	test $(shell git status --porcelain 2>/dev/null| egrep "^(M| M)" | wc -l) == 0 || git commit -a -m "proceed" \
-	&& $(shell git tag $(shell git describe --abbrev=0 --tags | awk 'BEGIN { FS="." } { $3++;  if ($3 > 99) { $3=0; $2++; if ($2 > 99) { $2=0; $1++ } } } { printf "%d.%d.%d\n", $1, $2, $3 }')) 
+	test $(shell git status --porcelain 2>/dev/null| egrep "^(M| M)" | wc -l) == 0 || git commit -a -m "proceed" && \
+	V=$(shell git describe --abbrev=0 --tags | awk 'BEGIN { FS="." } { $3++;  if ($3 > 99) { $3=0; $2++; if ($2 > 99) { $2=0; $1++ } } } { printf "%d.%d.%d\n", $1, $2, $3 }') && \
+	$(shell git tag $V) 
 	#&& git push origin master
 
