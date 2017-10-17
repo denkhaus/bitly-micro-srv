@@ -22,7 +22,6 @@ build: proto commit
 
 commit:
 	git add -A  
-	test $(shell git status --porcelain 2>/dev/null | egrep "^(M| M)" | wc -l) == 0 || git semver next 1>/dev/null && \
-	git commit -a -m "proceed" && git push origin master
-  
-
+	ifgt ($(shell git status --porcelain 2>/dev/null | egrep "^(M| M)" | wc -l), 0)
+		$(shell git semver next && git commit -a -m "proceed" && git push origin master) 
+	endif
