@@ -1,6 +1,7 @@
 .PHONY: proto build
 
-IMAGE_NAME=denkhaus/bitly-micro-srv:$(shell git semver get)
+VERSION=$(shell git semver get)
+IMAGE_NAME=denkhaus/bitly-micro-srv:$(VERSION)
 
 all: deploy
 
@@ -17,7 +18,7 @@ push: build
 	docker push $(IMAGE_NAME)
 
 build: proto commit
-	docker build --build-arg VERSION=$(shell git semver get) --build-arg GIT_COMMIT=$(shell git rev-list -1 HEAD) -t $(IMAGE_NAME)  .
+	docker build --build-arg VERSION=$(VERSION) --build-arg GIT_COMMIT=$(shell git rev-list -1 HEAD) -t $(IMAGE_NAME)  .
 
 commit:
 	git add -A
