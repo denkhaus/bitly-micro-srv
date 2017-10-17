@@ -1,6 +1,6 @@
 .PHONY: proto build
 
-IMAGE_NAME :=denkhaus/bitly-micro-srv:$(shell git semver get)
+IMAGE_NAME=denkhaus/bitly-micro-srv:$(shell git semver get)
 
 all: deploy
 
